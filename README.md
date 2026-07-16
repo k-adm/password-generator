@@ -10,6 +10,18 @@ Everything runs in your browser - nothing is ever sent over the network.
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
 
+## Screenshots
+
+| Password | Passphrase |
+|:--:|:--:|
+| ![Password mode](screenshots/popup-password.png) | ![Passphrase mode](screenshots/popup-passphrase.png) |
+
+<p align="center">
+  <img src="screenshots/settings.png" alt="Options - theme and default generator settings" width="640">
+</p>
+
+_Demo data - the generated secrets shown above are examples._
+
 ## Features
 
 - **Two modes:**
