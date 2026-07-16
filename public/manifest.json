@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Password Generator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Local, offline generator for strong random passwords and memorable passphrases. Adjustable length, character sets, and separators; nothing leaves your browser.",
   "permissions": ["storage"],
   "action": {
