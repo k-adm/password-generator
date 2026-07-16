@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator - Settings</title>
+    <style>
+      /* Pre-paint background matched to the OS scheme so "system" theme (the
+         default) shows no light/dark flash before React mounts next-themes. */
+      html {
+        color-scheme: light dark;
+      }
+      html,
+      body {
+        margin: 0;
+        background: oklch(1 0 0);
+      }
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background: oklch(0.145 0 0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/options/main.jsx"></script>
+  </body>
+</html>
