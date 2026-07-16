@@ -4,6 +4,7 @@ A local, offline Chrome extension (Manifest V3) for generating strong random
 passwords and memorable [diceware](https://www.eff.org/dice) passphrases.
 Everything runs in your browser - nothing is ever sent over the network.
 
+[![build](https://github.com/k-adm/password-generator/actions/workflows/build.yml/badge.svg)](https://github.com/k-adm/password-generator/actions/workflows/build.yml)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
