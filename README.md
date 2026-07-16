@@ -5,6 +5,7 @@ passwords and memorable [diceware](https://www.eff.org/dice) passphrases.
 Everything runs in your browser - nothing is ever sent over the network.
 
 [![build](https://github.com/k-adm/password-generator/actions/workflows/build.yml/badge.svg)](https://github.com/k-adm/password-generator/actions/workflows/build.yml)
+[![Download](https://img.shields.io/badge/download-latest%20build-2ea44f.svg)](https://github.com/k-adm/password-generator/releases/latest)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
@@ -33,6 +34,18 @@ Everything runs in your browser - nothing is ever sent over the network.
   scripts, no host access to any page.
 - Randomness comes from the Web Crypto CSPRNG (`crypto.getRandomValues`), with
   unbiased selection via rejection sampling and a Fisher-Yates shuffle.
+
+## Download (prebuilt)
+
+A ready-to-use build is attached to the
+[**latest release**](https://github.com/k-adm/password-generator/releases/latest)
+- direct link:
+[`password-generator.zip`](https://github.com/k-adm/password-generator/releases/latest/download/password-generator.zip).
+Download the zip, unzip it, then in Chrome open `chrome://extensions/`, enable
+**Developer mode**, click **Load unpacked**, and select the unzipped folder.
+
+The download is rebuilt automatically on every push to `main`, so the link always
+points at the current build.
 
 ## Install (from source)
 
