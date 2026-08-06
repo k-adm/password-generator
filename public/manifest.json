@@ -1,12 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Password Generator",
-  "version": "1.1.1",
-  "description": "Local, offline generator for strong random passwords and memorable passphrases. Adjustable length, character sets, and separators; nothing leaves your browser.",
+  "name": "Offline Password Generator",
+  "version": "1.2.0",
+  "description": "Generate strong random passwords and memorable diceware passphrases. Fully offline - nothing ever leaves your browser.",
+  "homepage_url": "https://github.com/k-adm/password-generator",
+  "minimum_chrome_version": "111",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Password Generator",
+    "default_title": "Offline Password Generator",
     "default_icon": {
       "16": "assets/icon16.png",
       "48": "assets/icon48.png",

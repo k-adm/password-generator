@@ -36,7 +36,7 @@ export default function App() {
     <div className="mx-auto min-h-screen max-w-xl bg-background px-6 py-8 text-foreground">
       <header className="mb-6 flex items-center gap-2">
         <KeyRound className="size-6 text-primary" />
-        <h1 className="text-xl font-semibold">Password Generator</h1>
+        <h1 className="text-xl font-semibold">Offline Password Generator</h1>
       </header>
 
       <div className="space-y-6">

@@ -1,4 +1,4 @@
-# Password Generator
+# Offline Password Generator
 
 A local, offline Chrome extension (Manifest V3) for generating strong random
 passwords and memorable [diceware](https://www.eff.org/dice) passphrases.
@@ -46,6 +46,8 @@ _Demo data - the generated secrets shown above are examples._
   scripts, no host access to any page.
 - Randomness comes from the Web Crypto CSPRNG (`crypto.getRandomValues`), with
   unbiased selection via rejection sampling and a Fisher-Yates shuffle.
+- Generated secrets are never persisted - only your generator settings are, and
+  only on your own device. Full details in [PRIVACY.md](PRIVACY.md).
 
 ## Download (prebuilt)
 
@@ -71,8 +73,6 @@ Then load it in Chrome:
 1. Open `chrome://extensions/`
 2. Enable **Developer mode**
 3. Click **Load unpacked** and select the `dist/` folder
-
-Not published to the Chrome Web Store - build and load it yourself.
 
 ## How strength is estimated
 

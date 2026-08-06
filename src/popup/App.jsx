@@ -67,7 +67,9 @@ export default function App() {
     <div className="flex flex-col bg-background text-foreground">
       <header className="flex items-center gap-2 border-b px-3 py-2.5">
         <KeyRound className="size-5 text-primary" />
-        <h1 className="flex-1 text-sm font-semibold">Password Generator</h1>
+        <h1 className="flex-1 text-sm font-semibold">
+          Offline Password Generator
+        </h1>
         <Button
           variant="ghost"
           size="icon"

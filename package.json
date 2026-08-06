@@ -1,8 +1,8 @@
 {
   "name": "password-generator",
   "private": true,
-  "version": "1.1.1",
-  "description": "Local, offline Chrome (MV3) generator for strong random passwords and memorable diceware passphrases. Nothing leaves your browser.",
+  "version": "1.2.0",
+  "description": "Offline Password Generator - a Chrome (MV3) generator for strong random passwords and memorable diceware passphrases. Nothing leaves your browser.",
   "author": "k-adm",
   "license": "MIT",
   "homepage": "https://github.com/k-adm/password-generator#readme",
