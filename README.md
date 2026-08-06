@@ -28,13 +28,13 @@ _Demo data - the generated secrets shown above are examples._
   - **Password** - length slider (8-64), toggles for uppercase / digits /
     symbols (lowercase is always on), and an **"exclude look-alike characters"**
     option (`0`/`O`, `1`/`l`/`I`) that is **on by default**.
-  - **Passphrase** - word-count slider (3-10), optional capitalization, an
+  - **Passphrase** - word-count slider (2-10), optional capitalization, an
     optional trailing digit per word, and a choice of separators (hyphen, space,
     period, comma, underscore, a random number, or a random number + symbol).
 - **Character-by-character colored output**, one-click copy, and instant
   regeneration.
-- **Strength meter** - a badge (Very weak … Very strong), a bar, and an
-  estimated crack time, all computed from the secret's entropy.
+- **Strength meter** - a badge (Very weak … Very strong), a bar, and the exact
+  entropy in bits. No invented crack times - see below.
 - **Options page** - theme (System / Light / Dark) and default generation
   parameters. Settings persist in `chrome.storage.local` and stay in sync
   between the popup and the options page.
@@ -74,14 +74,37 @@ Then load it in Chrome:
 2. Enable **Developer mode**
 3. Click **Load unpacked** and select the `dist/` folder
 
-## How strength is estimated
+## How strength is measured
 
-For randomly generated secrets, entropy is exact:
+For randomly generated secrets, entropy is exact rather than estimated:
 `password = length x log2(pool size)`, `passphrase = words x log2(7776)` plus the
-contribution of added digits and random separators. The crack-time figure assumes
-an offline attacker at ~1e10 guesses/sec and, on average, half the keyspace. This
-is intentionally not zxcvbn (which targets human-chosen, guessable passwords) -
-for uniformly random secrets the mathematical entropy is the honest measure.
+contribution of added digits and random separators. This is intentionally not
+zxcvbn (which targets human-chosen, guessable passwords) - for uniformly random
+secrets the mathematical entropy is the honest measure.
+
+The meter reports that number in **bits**, and deliberately does **not** show a
+"time to crack".
+
+Any crack time has to assume a guess rate, and the real rate is set by how the
+target service stores your secret - not by the secret itself. That rate spans
+roughly eight orders of magnitude: on the order of 1e4 guesses/sec against bcrypt
+at work factor 12, upwards of 1e12/sec against unsalted MD5 on GPUs. A generator
+cannot know where its output will end up, so a single figure would be invented,
+and it would rot as hardware gets faster. Bits are a property of the secret
+itself, need no assumptions about the attacker, and never saturate - which is
+also why the number keeps moving at every step of the slider instead of pinning
+at "billions of years".
+
+A useful intuition: each extra bit doubles the search space. The badge maps bits
+to a plain-language label at 30 / 55 / 75 / 95 bits, and the bar reads full at 95
+bits, where the label becomes "Very strong".
+
+Note that entropy depends only on your **settings**, not on which words or
+characters happened to come up. A five-word diceware phrase is worth the same
+64.6 bits whether it reads `ox-ivy-ad-elk-ash` or
+`antihistamine-configure-bookshelf-parakeet-tumbleweed` - an attacker who knows
+you used diceware searches the 7776-word list, not the letters. Regenerating at
+fixed settings will therefore never move the number, and that is correct.
 
 ## Wordlist
 

@@ -12,7 +12,6 @@ export interface Strength {
   bits: number;
   label: StrengthLabel;
   score: number; // 0..1, for the meter width
-  crackTime: string;
 }
 
 export function passwordEntropyBits(opts: PasswordOptions): number {
@@ -35,11 +34,25 @@ export function passphraseEntropyBits(opts: PassphraseOptions): number {
   return bits;
 }
 
+/**
+ * Label thresholds in bits, ascending; the last entry is open-ended.
+ *
+ * The UI deliberately reports entropy rather than a crack time. A time figure
+ * would have to assume a guess rate, but the real rate is set by how the target
+ * service hashes the secret and spans some eight orders of magnitude - roughly
+ * 1e4/s against bcrypt at work factor 12, upwards of 1e12/s against unsalted
+ * MD5 on GPUs. A generator cannot know where its output will be used, so any
+ * single number would be made up, and would rot as hardware improves. Bits are
+ * a property of the secret itself, need no assumptions, and never saturate.
+ */
+/** Bits at which a secret becomes "Very strong" - also where the bar fills. */
+export const VERY_STRONG_BITS = 95;
+
 const LABELS: { max: number; label: StrengthLabel }[] = [
-  { max: 28, label: "Very weak" },
-  { max: 36, label: "Weak" },
-  { max: 60, label: "Fair" },
-  { max: 128, label: "Strong" },
+  { max: 30, label: "Very weak" },
+  { max: 55, label: "Weak" },
+  { max: 75, label: "Fair" },
+  { max: VERY_STRONG_BITS, label: "Strong" },
   { max: Infinity, label: "Very strong" },
 ];
 
@@ -48,38 +61,16 @@ function labelFor(bits: number): StrengthLabel {
   return hit ? hit.label : "Very strong";
 }
 
-// Order-of-magnitude offline attacker rate (fast-hash / GPU), guesses/second.
-const GUESSES_PER_SEC = 1e10;
-
-function humanTime(seconds: number): string {
-  if (seconds < 1) return "instantly";
-  const minute = 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const year = day * 365;
-  if (seconds < minute) return `${Math.round(seconds)} seconds`;
-  if (seconds < hour) return `${Math.round(seconds / minute)} minutes`;
-  if (seconds < day) return `${Math.round(seconds / hour)} hours`;
-  if (seconds < year) return `${Math.round(seconds / day)} days`;
-  const years = seconds / year;
-  if (years < 100) return `${Math.round(years)} years`;
-  if (years < 1e3) return "centuries";
-  if (years < 1e6) return "thousands of years";
-  if (years < 1e9) return "millions of years";
-  return "billions of years";
-}
-
 export function strengthFromBits(bits: number): Strength {
   // A broken/non-finite entropy must never read as strong.
   if (!Number.isFinite(bits) || bits <= 0) {
-    return { bits: 0, label: "Very weak", score: 0, crackTime: "instantly" };
+    return { bits: 0, label: "Very weak", score: 0 };
   }
-  // Average guesses to crack is half the keyspace.
-  const seconds = Math.pow(2, bits) / 2 / GUESSES_PER_SEC;
   return {
     bits,
+    // A full bar means exactly "Very strong", so bar and label never disagree.
+    // Above that the bar pins while the reported bits keep climbing.
     label: labelFor(bits),
-    score: Math.max(0, Math.min(1, bits / 128)),
-    crackTime: humanTime(seconds),
+    score: Math.max(0, Math.min(1, bits / VERY_STRONG_BITS)),
   };
 }

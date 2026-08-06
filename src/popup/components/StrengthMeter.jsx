@@ -30,8 +30,11 @@ export function StrengthMeter({ strength }) {
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
         <Badge className={cn(s.badge)}>{strength.label}</Badge>
-        <span className="text-xs text-muted-foreground">
-          {strength.crackTime} to crack
+        <span
+          className="text-xs text-muted-foreground"
+          title="Entropy of the generated secret. Higher is better; every extra bit doubles the search space."
+        >
+          {Math.round(strength.bits)} bits
         </span>
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
