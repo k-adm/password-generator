@@ -11,8 +11,15 @@ function charClass(ch) {
 }
 
 export function ColoredSecret({ value, mode }) {
-  // Passphrases wrap at word boundaries; random passwords may break anywhere.
-  const wrap = mode === "passphrase" ? "break-words" : "break-all";
+  // Passphrases still prefer to break at a separator, random passwords may
+  // break anywhere. Both must let the browser count mid-word breaks towards
+  // the intrinsic size: this span is a flex item of the output box, and a flex
+  // item will not shrink below its min-content width. Plain `break-words`
+  // (overflow-wrap: break-word) does not lower min-content, so a phrase joined
+  // by separators that offer no break opportunity - periods, commas,
+  // underscores, or the random digit/symbol ones - stayed one unbreakable
+  // token and pushed the popup out to ~1000px wide.
+  const wrap = mode === "passphrase" ? "wrap-anywhere" : "break-all";
   return (
     <span
       className={cn("font-mono text-base leading-relaxed tracking-wide", wrap)}

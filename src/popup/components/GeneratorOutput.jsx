@@ -31,7 +31,7 @@ export function GeneratorOutput({ value, mode, onRegenerate }) {
         onClick={handleCopy}
         aria-label="Copy generated value"
         title="Click to copy"
-        className="flex min-h-16 w-full items-center rounded-lg border bg-muted/40 px-3 py-2.5 text-left transition-colors hover:bg-muted/70"
+        className="flex min-h-16 w-full items-center rounded-lg border bg-muted/40 px-6 py-3 text-left transition-colors hover:bg-muted/70"
       >
         <ColoredSecret value={value} mode={mode} />
       </button>
