@@ -49,6 +49,11 @@ _Demo data - the generated secrets shown above are examples._
 - Generated secrets are never persisted - only your generator settings are, and
   only on your own device. Full details in [PRIVACY.md](PRIVACY.md).
 
+## Install
+
+[**Add to Chrome from the Chrome Web Store**](https://chromewebstore.google.com/detail/mapgfalbmekiobemhpoanfnhnmjpajie)
+- one click, and updates arrive automatically.
+
 ## Download (prebuilt)
 
 A ready-to-use build is attached to the
